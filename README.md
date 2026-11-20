@@ -42,3 +42,10 @@ leaves this unspecified for interactive shells, so this library raises
 ``ExpansionError`` instead of silently dropping the backslash.  If you are
 feeding it a partial line from a line editor, strip the trailing backslash
 before calling ``expand``.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
